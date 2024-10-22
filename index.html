@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoleyTournament</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+    <header>
+        <h1><strong>VOLEYTOURNAMENT</strong></h1>
+        <nav>
+            <img src="balon3.svg" alt="Balón de voleibol" class="balon-voley izquierda">
+            <button onclick="mostrarSeccion('creartorneo')"><strong>Crear Torneo</strong></button>
+            <button onclick="mostrarSeccion('registrarEquipo')"><strong>Registrar Equipo</strong></button>
+            <button onclick="mostrarSeccion('contador')"><strong>Contador</strong></button>
+            <button onclick="mostrarSeccion('verEquipos')"><strong>Ver Equipos</strong></button>
+            <img src="balon3.svg" alt="Balón de voleibol" class="balon-voley derecha">
+        </nav>
+    </header>
+
+    <main>
+        <section id="creartorneo" class="section">
+            <h2>Crear Torneo</h2>
+            <div class="informativo">
+                <p><strong>Esta sección permite crear un nuevo torneo de voleibol, seleccionando su nombre, tipo y formato.</strong></p>
+            </div>
+            <form id="formCrearTorneo">
+                <input type="text" id="nombreTorneo" placeholder="Nombre del Torneo" required>
+                <select id="tipoTorneo" required>
+                    <option value="" disabled selected>Seleccionar Tipo de Torneo</option>
+                    <option value="Masculino"><strong>Masculino</strong></option>
+                    <option value="Femenino"><strong>Femenino</strong></option>
+                    <option value="Mixto"><strong>Mixto</strong></option>
+                </select>
+                <select id="formatoTorneo" required>
+                    <option value="" disabled selected><strong>Seleccionar Formato</strong></option>
+                    <option value="4x4">4x4 (Máximo 6 jugadores)</option>
+                    <option value="6x6">6x6 (Máximo 8 jugadores)</option>
+                </select>
+                <button class="regis" type="submit"><strong>Registrar Torneo</strong></button>
+            </form>
+            <div class="dato-curioso">
+                <p><strong>Dato curioso sobre el voleibol: El voleibol fue creado en 1895 por William G. Morgan.</strong></p>
+            </div>
+            <img src="team.png" alt="Imagen de Voleibol" class="imagen">
+        </section>
+
+        <section id="registrarEquipo" class="section">
+            <h2><strong>Registrar Equipo</strong></h2>
+            <div class="informativo">
+                <p><strong>En esta sección puedes registrar un nuevo equipo en el torneo seleccionado, incluyendo el nombre del equipo y del capitán.</strong></p>
+            </div>
+            <form id="formRegistrarEquipo">
+                <select id="torneoParaRegistrar">
+                    <option value="" disabled selected><strong>Seleccionar Torneo</strong></option>
+                </select>
+                <input type="text" id="nombreEquipo" placeholder="Nombre del Equipo" required>
+                <input type="text" id="nombreCapitan" placeholder="Nombre del Capitán" required>
+                <button type="submit"><strong>Registrar Equipo</strong></button>
+            </form>
+            <div class="dato-curioso">
+                <p><strong>Dato curioso sobre el voleibol: El voleibol se jugó por primera vez en los Juegos Olímpicos en 1964.</strong></p>
+            </div>
+            <img src="kage.png" alt="Imagen de Equipo" class="imagen">
+        </section>
+
+        <section id="contador" class="section">
+            <h2><strong>Contador de Puntos</strong></h2>
+            <div class="informativo">
+                <p><strong>Esta sección permite llevar el control de los puntos en un partido, indicando los puntajes de cada equipo y quién gana.</strong></p>
+            </div>
+            <div id="contadorDisplay" class="contador">
+                <span id="nombreEquipo1"><strong>Equipo 1</strong></span>: <span id="puntosEquipo1">0</span>
+                <span id="contadorDash"> -vs-  </span>
+                <span id="nombreEquipo2"><strong>Equipo 2</strong></span>: <span id="puntosEquipo2">0</span>
+            </div>
+            <div class="seleccion-equipos">
+                <select id="selectEquipo1" onchange="cambiarNombre('equipo1')">
+                    <option value="" disabled selected>Seleccionar Equipo 1</option>
+                </select>
+                <select id="selectEquipo2" onchange="cambiarNombre('equipo2')">
+                    <option value="" disabled selected>Seleccionar Equipo 2</option>
+                </select>
+            </div>
+
+            <div class="botones">
+                <button onclick="sumarPunto('equipo1')"><strong>Sumar Puntos Equipo 1</strong></button>
+                <button onclick="sumarPunto('equipo2')"><strong>Sumar Puntos Equipo 2</strong></button>
+            </div>
+            <div id="resultadoPartido" class="resultado"></div>
+            <div class="dato-curioso">
+                <p><strong>Dato curioso sobre el voleibol: La red del voleibol está a una altura de 2.43 metros para los hombres y 2.24 metros para las mujeres.</strong></p>
+            </div>
+            <img src="hina.png" alt="Imagen de Contador" class="imagen">
+        </section>
+
+        <section id="verEquipos" class="section">
+            <h2><strong>Ver Equipos</strong></h2>
+            <div class="informativo">
+                <p><strong>Esta sección permite llevar el control de los puntos en un partido, indicando los puntajes de cada equipo y quién gana.</strong>.</p>
+            </div>
+            <div class="seleccion-torneo">
+                <select id="torneoSeleccionado" onchange="mostrarEquipos()">
+                    <option value="" disabled selected><strong>Seleccionar Torneo</strong></option>
+                </select>
+            </div>
+            <table id="listaEquipos">
+                <thead>
+                    <tr>
+                        <th><strong>Nombre del Equipo</strong></th>
+                        <th><strong>Capitán</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <div class="dato-curioso">
+                <p><strong>Dato curioso sobre el voleibol: El voleibol fue diseñado inicialmente para ser un juego menos agresivo que el baloncesto.</strong></p>
+            </div>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfUThgg8ZlGYMdQ_-OHAh45Wtr___FmYEZ0Q&s" alt="Imagen de Equipos" class="imagen">
+        </section>
+
+        <footer>
+            <p>&copy; <strong>2024 VoleyTournament</strong></p>
+        </footer>
+    </main>
+
+    <script src="index.js"></script>
+</body>
+
+</html>
